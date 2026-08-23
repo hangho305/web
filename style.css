@@ -1,0 +1,2806 @@
+body{
+    background-color: rgb(0, 187, 255);
+}
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* HEADER */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 30px 50px;
+}
+
+/* LOGO */
+.logo img {
+  width: 110px;
+  height: auto;
+  display: block;
+}
+
+/* NAVIGATION */
+.navigation {
+  display: flex;
+  gap: 28px;
+
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.navigation a {
+  text-decoration: none;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+  .navbar {
+    padding: 38px 8%;
+
+    /* vẫn giữ logo trái, nav phải */
+    align-items: flex-start;
+  }
+
+  /* Logo nhỏ lại một chút */
+  .logo img {
+    width: 95px;
+  }
+
+  /* Navigation chuyển thành cột */
+  .navigation {
+    flex-direction: column;
+    align-items: flex-end;
+    
+    gap: 16px;
+
+    font-size: 14px;
+  }
+}
+
+.sound-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  cursor: pointer;
+  user-select: none;
+
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.sound-icon {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  width: 25px;
+  height: 20px;
+}
+
+.sound-icon span {
+  display: block;
+
+  width: 2px;
+  height: 4px;
+
+  background: currentColor;
+  border-radius: 999px;
+
+  transform-origin: center;
+}
+
+/* SOUND ON */
+
+.sound-control.is-playing .sound-icon span {
+  animation: sound-wave 0.8s ease-in-out infinite alternate;
+}
+
+.sound-control.is-playing .sound-icon span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.sound-control.is-playing .sound-icon span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.sound-control.is-playing .sound-icon span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.sound-control.is-playing .sound-icon span:nth-child(4) {
+  animation-delay: 0.45s;
+}
+
+@keyframes sound-wave {
+  0% {
+    height: 4px;
+  }
+
+  50% {
+    height: 16px;
+  }
+
+  100% {
+    height: 7px;
+  }
+}
+
+/* SOUND OFF */
+
+.sound-control.is-muted .sound-icon span {
+  animation: none;
+  height: 3px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+  position: absolute;
+  bottom: 45px;
+  left: 0;
+
+  width: 100%;
+  padding: 0 50px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  color: white;
+
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 14px;
+  font-style: italic;
+
+  z-index: 10;
+}
+
+
+/* SOUND */
+
+.sound-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  flex-shrink: 0;
+
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+
+/* THE LONG LINE */
+
+.footer-line {
+  height: 1px;
+  background-color: white;
+  opacity: 0.9;
+
+  flex: 1;
+}
+
+
+/* TEXT */
+
+.footer-tagline {
+  margin: 0;
+  white-space: nowrap;
+}
+
+
+/* SHORTER LINE AFTER TAGLINE */
+
+.footer-line-short {
+  flex: 0 1 280px;
+}
+
+@media (max-width: 800px) {
+
+  .footer {
+    bottom: 45px;
+
+    padding: 0 35px;
+
+    gap: 16px;
+  }
+
+  /* Ẩn tagline */
+  .footer-tagline {
+    display: none;
+  }
+
+  /* Ẩn line bên phải */
+  .footer-line-short {
+    display: none;
+  }
+
+  /* Line còn lại kéo dài */
+  .footer-line {
+    flex: 1;
+  }
+
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  position: absolute;
+
+  top: 13%;
+  left: 47%;
+
+  transform: translateX(-50%);
+
+  color: white;
+}
+
+
+/* WHOLE COMPOSITION */
+
+.hero-title {
+  position: relative;
+
+  width: 460px;
+  height: 210px;
+
+  font-family: "Instrument Sans", sans-serif;
+}
+
+
+/* =========================
+   MY HANG
+========================= */
+
+.hero-name-group {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+}
+
+
+.hero-hello {
+  margin: 10px 0 0 30px;
+
+  font-family: "Instrument Sans", sans-serif; 
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+
+.hero-name {
+  margin-left: 30px;
+
+  font-family: "Instrument Serif", serif;
+
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 0.9;
+  font-style: italic;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   MULTI-DISCIPLINARY
+========================= */
+
+.hero-multi {
+  position: absolute;
+
+  top: 43px;
+  left: 260px;
+
+  font-family: "Instrument Sans", sans-serif;
+
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+
+/* =========================
+   DESIGNER
+========================= */
+
+.hero-designer {
+  position: absolute;
+
+  top: 56.5px;
+  left: 345px;
+
+  font-family: "Instrument Sans", sans-serif;
+
+  font-size: 10px;
+  font-weight: 600;
+  font-style: italic;
+}
+
+
+/* =========================
+   WELCOME
+========================= */
+
+.hero-welcome {
+  position: absolute;
+
+  top: 110px;
+  left: 55px;
+
+  margin: 0;
+
+  text-align: right;
+
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 10px;
+
+  line-height: 1.35;
+}
+
+
+.hero-welcome strong {
+  display: block;
+
+  font-weight: 650;
+  font-style: italic;
+}
+
+
+.hero-welcome span {
+  display: block;
+
+  font-weight: 400;
+}
+
+
+/* =========================
+   PORTFOLIO
+========================= */
+
+.hero-portfolio-wrap {
+  position: absolute;
+
+  top: 85px;
+  left: 105px;
+
+  display: flex;
+  align-items: center;
+}
+
+
+.hero-portfolio {
+  margin: 0;
+
+  font-family: "Instrument Serif", sans-serif;
+
+  font-size: 80px;
+  font-weight: 400;
+  line-height: 0.9;
+
+  white-space: nowrap;
+
+  -webkit-text-stroke: 1px white;
+
+  color: white;
+}
+
+
+/* =========================
+   BRACKETS
+========================= */
+
+.hero-bracket {
+  font-family: "Instrument Sans", sans-serif;
+
+  font-size: 90px;
+  font-weight: 300;
+
+  line-height: 0.8;
+}
+
+
+.hero-bracket-left {
+  margin-right: 8px;
+}
+
+
+.hero-bracket-right {
+  margin-left: 27px;
+}
+
+
+/* =========================
+   YEAR
+========================= */
+
+.hero-year {
+  position: absolute;
+
+  top: 13px;
+  right: 33px;
+
+  padding: 6px 8px 6px;
+
+  font-family: "Instrument Sans", sans-serif;
+
+  font-size: 10px;
+  font-weight: 400;
+  font-style: italic;
+
+  line-height: 1;
+
+  border: 1px solid white;
+  border-radius: 50%;
+
+  transform: rotate(10deg);
+}
+
+@media (max-width: 900px) {
+
+  .hero {
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .hero-title {
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+
+}
+
+
+
+@media (max-width: 480px) {
+
+  .hero-title {
+    transform: scale(0.85);
+  }
+
+}
+
+/* =========================
+   TEXT WARP
+========================= */
+
+.hero-title .warp-char {
+  display: inline-block;
+  will-change: transform;
+
+  transform: translate3d(0, 0, 0)
+             scaleX(1)
+             scaleY(1)
+             rotate(0deg);
+
+  transition: transform 0.12s ease-out;
+}
+
+/* giữ khoảng trắng giữa các từ */
+.hero-title .warp-space {
+  display: inline-block;
+  width: 0.25em;
+}
+
+/* Khi mouse rời title, chữ trở về mềm hơn */
+.hero-title.is-resetting .warp-char {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =========================================
+   INTRO LOADING SCREEN
+========================================= */
+
+.intro-loader {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  background: #e1f4ff;
+
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  /* chuẩn bị cho exit animation */
+  clip-path: circle(150% at 50% 50%);
+}
+
+
+/* =========================================
+   CENTER CONTENT
+========================================= */
+
+.loader-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 20px;
+}
+
+
+/* STAR */
+
+.loader-star {
+  width: 48px;
+  height: auto;
+
+  display: block;
+
+  animation: loader-star-spin 2.5s linear infinite;
+}
+
+
+@keyframes loader-star-spin {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =========================================
+   LOADING TEXT
+========================================= */
+
+.loader-text {
+  font-family: "Instrument Sans", sans-serif;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  color: #3978ca;
+
+  animation: loading-float 1.2s ease-in-out infinite alternate;
+}
+
+
+@keyframes loading-float {
+
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-5px);
+  }
+
+}
+
+
+/* giữ chỗ cho ... để text không nhảy */
+
+.loading-dots {
+  display: inline-block;
+
+  width: 1.5em;
+
+  text-align: left;
+}
+
+
+/* =========================================
+   SOUND NOTE
+========================================= */
+
+.loader-sound-note {
+  position: absolute;
+
+  bottom: 10%;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  margin: 0;
+
+  white-space: nowrap;
+
+  font-family: "Instrument Sans", sans-serif;
+
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+
+  color: #5ca8df;
+}
+
+
+/* =========================================
+   LOADER EXIT
+========================================= */
+
+.intro-loader.is-closing {
+
+  /*
+    full screen
+        ↓
+    circle
+        ↓
+    tiny circle
+        ↓
+    disappear
+  */
+
+  animation: close-loader 1.25s
+             cubic-bezier(0.76, 0, 0.24, 1)
+             forwards;
+}
+
+
+@keyframes close-loader {
+
+  /* full screen */
+
+  0% {
+    clip-path: circle(150% at 50% 50%);
+  }
+
+
+  /* bắt đầu bo lại */
+
+  35% {
+    clip-path: circle(70% at 50% 50%);
+  }
+
+
+  /* thành circle rõ ràng */
+
+  70% {
+    clip-path: circle(25% at 50% 50%);
+  }
+
+
+  /* biến mất vào giữa */
+
+  100% {
+    clip-path: circle(0% at 50% 50%);
+  }
+
+}
+
+
+/* content trong loader fade trước khi circle đóng */
+
+.intro-loader.is-closing .loader-center,
+.intro-loader.is-closing .loader-sound-note {
+
+  animation: loader-content-out 0.35s ease forwards;
+}
+
+
+@keyframes loader-content-out {
+
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+  .loader-star {
+    width: 40px;
+  }
+
+  .loader-text {
+    font-size: 14px;
+  }
+
+  .loader-sound-note {
+    font-size: 10px;
+    bottom: 10%;
+  }
+
+}
+
+/* =========================
+   HEADER HOVER EFFECT
+========================= */
+
+/* LOGO */
+
+.logo img {
+  transition: transform 0.25s ease;
+  transform-origin: center;
+}
+
+.logo:hover img {
+  transform: scale(1.08);
+}
+
+
+/* NAVIGATION */
+
+.navigation a {
+  display: inline-block;
+
+  transition:
+    transform 0.25s ease,
+    font-weight 0.25s ease;
+
+  transform-origin: center;
+}
+
+/* =========================
+   MAGNETIC NAVIGATION
+========================= */
+
+.nav-magnetic {
+  display: inline-block;
+
+  /* JS sẽ điều khiển translate */
+  transform: translate3d(0, 0, 0);
+
+  transition: transform 0.35s
+    cubic-bezier(0.22, 1, 0.36, 1);
+
+  will-change: transform;
+}
+
+
+/* vùng chứa 2 text */
+
+.nav-text-wrap {
+  position: relative;
+  display: block;
+
+  width: max-content;
+
+  overflow: hidden;
+
+  height: 1.2em;
+  line-height: 1.2em;
+
+  padding: 0 4px;
+}
+
+
+/* cả 2 bản text */
+
+.nav-text {
+  display: block;
+
+  white-space: nowrap;
+
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease,
+    font-weight 0.3s ease;
+}
+
+
+/* chữ bình thường */
+
+.nav-text-current {
+  position: relative;
+
+  transform: translateY(0);
+}
+
+
+/* chữ thứ 2 nằm phía dưới */
+
+.nav-text-new {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  transform: translateY(110%);
+
+  font-weight: 650;
+}
+
+
+/* =========================
+   TEXT SWAP ON HOVER
+========================= */
+
+.nav-magnetic:hover .nav-text-current {
+  transform: translateY(-110%);
+  opacity: 0;
+}
+
+
+.nav-magnetic:hover .nav-text-new {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* SOUND CONTROL HOVER */
+
+.sound-control {
+  transition: transform 0.25s ease;
+  transform-origin: center;
+}
+
+.sound-control:hover {
+  transform: scale(1.08);
+  font-weight: 600;
+}
+
+/* =========================================
+   ABOUT PAGE
+========================================= */
+
+.about-page {
+  min-height: 100vh;
+
+  background: #55aee0;
+  color: white;
+
+  overflow-x: hidden;
+}
+
+/* =========================================
+   NAVIGATION FONT WEIGHT
+========================================= */
+
+/* HOME + tất cả nav bình thường */
+.navigation,
+.navigation a,
+.navigation .nav-text {
+  font-weight: 100;
+}
+
+
+/* Current page only */
+.navigation .nav-current,
+.navigation .nav-current .nav-text {
+  font-weight: 650;
+}
+
+
+/* Current page không click được */
+.navigation .nav-current {
+  cursor: default;
+  pointer-events: none;
+}
+
+
+/* =========================================
+   DESKTOP ABOUT
+========================================= */
+
+.about-main {
+  width: 100%;
+}
+
+
+/* desktop visible by default */
+
+.about-desktop {
+  position: relative;
+
+  width: min(1100px, 78vw);
+
+  height: calc(100dvh - 150px);
+  min-height: 520px;
+  max-height: 650px;
+
+  margin: 0 auto;
+}
+
+
+/* mobile hidden */
+
+.about-mobile-scroll {
+  display: none;
+}
+
+
+/* =========================================
+   NAME
+========================================= */
+
+.about-name-block {
+  position: absolute;
+
+  top: 55px;
+  left: 0;
+
+  width: 360px;
+}
+
+
+.about-small {
+  margin: 0;
+
+  font-family: "Instrument Sans", sans-serif;
+font-size: clamp(12px, 1.25vw, 14px);  
+font-weight: 100;
+  font-style: italic;
+}
+
+
+.about-my-name {
+  text-align: right;
+
+  padding-right: 45px;
+}
+
+
+.about-name {
+  margin: -6px 0 0;
+
+  font-family: "Instrument Serif", serif;
+  font-size: 56px;
+  font-weight: 400;
+  font-style: italic;
+
+  line-height: 0.95;
+
+  white-space: nowrap;
+}
+
+
+.about-call-me {
+  margin-top: 1px;
+  margin-left: -10px;
+}
+
+
+/* =========================================
+   COMPUTER
+========================================= */
+
+.about-computer-wrap {
+  position: absolute;
+
+  top: 17%;
+  left: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px; /* khoảng cách bracket ↔ computer */
+}
+
+
+.about-computer {
+  width: 180px;
+  height: auto;
+
+  display: block;
+}
+.about-computer:hover {
+  transform: scale(1.06);
+}
+
+.computer-bracket {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 110px;
+  font-weight: 300;
+
+}
+
+
+/* =========================================
+   PERSONAL PARAGRAPHS
+========================================= */
+
+.about-personal-text {
+  position: absolute;
+
+  top: 26%;
+  right: 10px;
+
+  display: grid;
+
+  grid-template-columns: 190px 32px 220px;
+  align-items: start;
+
+  gap: 20px;
+
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+
+  line-height: 1.25;
+}
+
+
+.about-personal-text p {
+  margin: 0;
+}
+
+
+.about-personal-text strong {
+  font-weight: 550;
+}
+
+
+.about-star {
+  font-size: 30px;
+  margin-top:-40px;
+  margin-left: -30px;
+  text-align: center;
+}
+
+
+/* =========================================
+   STATEMENT
+========================================= */
+
+/* =========================
+   ABOUT STATEMENT
+========================= */
+
+.about-statement {
+  position: absolute;
+
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 700px;
+
+  display: grid;
+
+  /* 6 cột nhỏ giúp placement linh hoạt hơn */
+  grid-template-columns: repeat(6, 1fr);
+
+  row-gap: 24px;
+
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1;
+
+  text-align: center;
+}
+
+
+/* không cho text tự xuống dòng */
+
+.about-statement > * {
+  white-space: nowrap;
+}
+
+
+/* ---------- ROW 1 ---------- */
+
+.statement-1 {
+  grid-column: 2 / 4;
+  grid-row: 1;
+}
+
+.statement-2 {
+  grid-column: 4 / 6;
+  grid-row: 1;
+}
+
+
+/* ---------- ROW 2 ---------- */
+
+.statement-3 {
+  grid-column: 1 / 3;
+  grid-row: 2;
+}
+
+.statement-4 {
+  grid-column: 3 / 5;
+  grid-row: 2;
+}
+
+.statement-5 {
+  grid-column: 5 / 7;
+  grid-row: 2;
+}
+
+
+/* ---------- ROW 3 ---------- */
+
+.statement-6 {
+  grid-column: 2 / 4;
+  grid-row: 3;
+}
+
+.statement-7 {
+  grid-column: 4 / 6;
+  grid-row: 3;
+}
+
+
+.about-statement strong {
+  font-weight: 650;
+  font-style: italic;
+}
+
+/* =========================================
+   ABOUT — SMALL DESKTOP / TABLET
+========================================= */
+
+@media (min-width: 801px) and (max-width: 1200px) {
+
+  .about-desktop {
+    width: 90vw;
+    height: 650px;
+  }
+
+
+  /* ---------- NAME ---------- */
+
+  .about-name-block {
+    top: 55px;
+    left: 7%;
+
+    width: 320px;
+  }
+
+  .about-name {
+    font-size: clamp(44px, 5vw, 56px);
+  }
+
+  .about-my-name {
+    padding-right: 30px;
+  }
+
+
+  /* ---------- COMPUTER ---------- */
+
+  .about-computer-wrap {
+    top: 110px;
+    left: 15%;
+
+    gap: 10px;
+  }
+
+  .about-computer {
+    width: clamp(135px, 16vw, 180px);
+  }
+
+  .computer-bracket {
+    font-size: clamp(75px, 9vw, 110px);
+  }
+
+
+  /* ---------- PARAGRAPHS ---------- */
+
+.about-personal-text {
+  top: 18vh;
+
+  /* bỏ neo bên phải */
+  right: auto;
+
+  /* paragraph đi theo viewport */
+  left: 53%;
+
+  grid-template-columns:
+    minmax(140px, 170px)
+    25px
+    minmax(150px, 190px);
+
+  gap: clamp(10px, 1.5vw, 20px);
+
+  font-size: clamp(12px, 1.25vw, 14px);
+}
+
+
+  /* ---------- STATEMENT ---------- */
+
+  .about-statement {
+    width: min(700px, 70vw);
+
+    font-size: clamp(20px, 2.2vw, 25px);
+  }
+}
+/* =========================================
+   ABOUT MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+  /*
+    DESKTOP CONTENT OFF
+  */
+
+  .about-desktop {
+    display: none;
+  }
+
+    .about-page .footer {
+    position: fixed;
+    bottom: 45px;
+    left: 0;
+    width: 100%;
+
+    z-index: 100;
+  }
+
+
+  /* HEADER FIXED ON MOBILE */
+
+.about-page header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.about-page .navbar {
+  width: 100%;
+}
+
+.about-page .logo,
+.about-page .navigation {
+  pointer-events: auto;
+}
+  /*
+    Need scroll distance to transition
+    between the two scenes
+  */
+
+  .about-mobile-scroll {
+    display: block;
+
+    height: 150vh;
+  }
+
+
+  /*
+    stage stays on screen while user scrolls
+  */
+
+  .about-mobile-stage {
+    position: sticky;
+
+    top: 0;
+
+    width: 100%;
+    height: 100dvh;
+
+    overflow: hidden;
+  }
+
+
+  .about-mobile-panel {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    will-change: transform, opacity;
+  }
+
+
+
+  /* =====================================
+     FIRST MOBILE PANEL
+  ===================================== */
+
+  .about-mobile-intro {
+    opacity: 1;
+
+    transform: translateY(0);
+
+    transition:
+      transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.45s ease;
+  }
+
+
+  .mobile-name-block {
+    position: absolute;
+
+    top:28%;
+    left: 50%;
+
+    width: 80%;
+
+    transform: translateX(-50%);
+  }
+
+
+  .mobile-name-block .about-small:first-child {
+    text-align: right;
+
+    padding-right: 25px;
+    padding-bottom: 10px;
+  }
+
+  .mobile-name-block .about-name {
+    font-size: clamp(42px, 10vw, 58px);
+
+    text-align: center;
+  }
+
+
+  .mobile-call-me {
+    margin-top: 8px;
+
+    padding-left: 3%;
+  }
+
+
+  .mobile-computer-wrap {
+    position: absolute;
+
+    top:38%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+  }
+
+
+  .mobile-computer-wrap .about-computer {
+    width: min(37vw, 190px);
+  }
+
+
+  .mobile-computer-wrap .computer-bracket {
+    font-size: 80px;
+  }
+
+
+
+  /* SCROLL DOWN */
+
+  .scroll-down {
+    position: absolute;
+
+    bottom: 20%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 0px;
+
+    font-family: "Instrument Sans", sans-serif;
+
+    font-size: 12px;
+    font-style: italic;
+
+    white-space: nowrap;
+
+  }
+
+
+.scroll-down {
+  left: 50%;
+  animation: scroll-bounce 1.2s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(5px);
+  }
+}
+
+
+
+  /* =====================================
+     SECOND MOBILE PANEL
+  ===================================== */
+
+  .about-mobile-details {
+    opacity: 0;
+
+    transform: translateY(70px);
+    
+
+    pointer-events: none;
+
+    transition:
+      transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.45s ease;
+  }
+
+
+
+  /* BIG STATEMENT */
+
+.mobile-statement {
+  position: absolute;
+
+  top: 28%;
+  left: 50%;
+
+  width: 100%;
+  transform: translateX(-50%);
+
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+
+  row-gap: 30px;
+
+  font-family: "Instrument Sans", sans-serif;
+  font-size: clamp(18px, 4vw, 25px);
+  line-height: 1.15;
+
+  text-align: center;
+}
+
+/* ROW 1 */
+
+.mobile-statement > :nth-child(1) {
+  grid-column: 2 / 4;
+  grid-row: 1;
+}
+
+.mobile-statement > :nth-child(2) {
+  grid-column: 4 / 6;
+  grid-row: 1;
+}
+
+/* ROW 2 */
+
+.mobile-statement > :nth-child(3) {
+  grid-column: 1 / 3;
+  grid-row: 2;
+}
+
+.mobile-statement > :nth-child(4) {
+  grid-column: 3 / 5;
+  grid-row: 2;
+}
+
+.mobile-statement > :nth-child(5) {
+  grid-column: 5 / 7;
+  grid-row: 2;
+}
+
+/* ROW 3 */
+
+.mobile-statement > :nth-child(6) {
+  grid-column: 2 / 4;
+  grid-row: 3;
+}
+
+.mobile-statement > :nth-child(7) {
+  grid-column: 4 / 6;
+  grid-row: 3;
+}
+
+.mobile-statement strong {
+  font-weight: 650;
+}
+
+
+
+  /* PERSONAL TEXT */
+
+.mobile-personal {
+  position: absolute;
+
+  top: 60%;
+  left: 50%;
+
+  width: 80%;
+  transform: translateX(-50%);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) 35px minmax(0, 1fr);
+
+  column-gap: 12px;
+
+  align-items: start;
+
+  font-family: "Instrument Sans", sans-serif;
+  font-size: clamp(12px, 3vw, 14px);
+  line-height: 1.25;
+}
+
+
+  .mobile-personal p {
+    margin: 0;
+  }
+
+
+  .mobile-personal strong {
+    font-weight: 650;
+  }
+
+
+  .mobile-personal .about-star {
+    font-size: 24px;
+      margin: 0;
+  justify-self: center;
+  align-self: start;
+
+  transform: translateY(-45px);
+  }
+
+
+
+  /* =====================================
+     SCROLLED STATE
+  ===================================== */
+
+  .about-mobile-scroll.is-details
+    .about-mobile-intro {
+
+    opacity: 0;
+
+    transform: translateY(-80px);
+
+    pointer-events: none;
+  }
+
+
+  .about-mobile-scroll.is-details
+    .about-mobile-details {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+  }
+
+
+
+  /* FOOTER MOBILE */
+
+  .about-page .footer-tagline,
+  .about-page .footer-line-short {
+    display: none;
+  }
+
+  
+
+}
+
+/* =========================================
+   RESUME OVERLAY
+========================================= */
+
+.resume-overlay {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100dvh;
+
+  background: rgba(0, 0, 0, 0);
+
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 5vh 5vw;
+
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    background 0.35s ease,
+    visibility 0.35s;
+}
+
+
+/* OPEN BACKGROUND */
+
+.resume-overlay.is-open {
+  visibility: visible;
+  pointer-events: auto;
+
+  background: rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+   PAPER — CORNER UNFOLD
+========================================= */
+
+.resume-full {
+  max-width: 75vw;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 7px;
+
+  opacity: 0;
+  transform: scale(0.65);
+
+  transition:
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s ease;
+}
+
+.resume-overlay.is-open .resume-full {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.about-computer {
+  cursor: pointer;
+
+  filter: brightness(1);
+
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.25s ease;
+
+  will-change: transform, filter;
+}
+
+.about-computer:hover {
+  filter: brightness(1.15);
+}
+
+
+.mobile-statement,
+.mobile-personal {
+  opacity: 0;
+
+  /* chỉ di chuyển dọc, không đụng transform cũ */
+  translate: 0 70px;
+
+  transition:
+    opacity 0.7s ease,
+    translate 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.about-mobile-scroll.is-details .mobile-statement {
+  opacity: 1;
+  translate: 0 0;
+
+  transition-delay: 0.05s;
+}
+
+
+.about-mobile-scroll.is-details .mobile-personal {
+  opacity: 1;
+  translate: 0 0;
+
+  transition-delay: 0.18s;
+}
+
+/* =========================================
+   PAGE TRANSITION
+========================================= */
+
+.page-transition {
+  position: fixed;
+
+  left: 50%;
+  top: 50%;
+
+  width: 150vmax;
+  height: 150vmax;
+
+  border-radius: 50%;
+
+  background: #e1f5ff; /* đổi thành đúng xanh nhạt của m */
+
+  z-index: 99999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  pointer-events: none;
+
+
+  /*
+    mặc định khi page vừa load:
+    vòng tròn đang cover toàn màn hình
+  */
+
+  transform: translate(-50%, -50%) scale(1);
+
+  transition:
+    transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+
+/* STAR */
+
+.transition-star {
+  position: fixed;
+
+  width: 45px;
+  height: 45px;
+
+  animation: transition-star-spin 1s linear infinite;
+}
+
+
+@keyframes transition-star-spin {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =========================
+   PAGE HAS FINISHED ENTERING
+========================= */
+
+.page-transition.is-hidden {
+  transform:
+    translate(-50%, -50%)
+    scale(0);
+}
+
+
+/* =========================
+   USER CLICKS ANOTHER PAGE
+========================= */
+
+.page-transition.is-entering {
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+}
+
+/* =========================================
+   PROJECTS PAGE
+========================================= */
+
+.projects-page {
+  height: 100dvh;
+  min-height: 650px;
+
+  color: white;
+  overflow: hidden;
+  position: relative;
+
+  font-family: "Instrument Sans", sans-serif;
+}
+
+
+/* BACKGROUND */
+
+.projects-background {
+  position: fixed;
+  inset: 0;
+
+  background-image: url("assets/background.webp");
+  background-size: cover;
+  background-position: center;
+
+  z-index: -1;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.projects-main {
+  position: relative;
+
+  width: 100%;
+  height: calc(100dvh - 90px);
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.projects-heading {
+  position: absolute;
+
+  left: 8%;
+  top: 10%;
+}
+
+
+.projects-heading h1 {
+  margin: 0;
+
+  font-family: "Instrument Serif", serif;
+  font-size: clamp(48px, 4vw, 64px);
+  font-weight: 400;
+  font-style: italic;
+    transform: scaleY(1.15);
+    letter-spacing: -2px;
+  line-height: 0.95;
+}
+
+
+.projects-heading p {
+  margin: 8px 0 0;
+
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+}
+
+
+/* =========================================
+   STAR
+========================================= */
+
+.projects-star {
+  position: absolute;
+
+  width: 24px;
+  height: 24px;
+
+  top: 15%;
+  right: 9%;
+}
+
+
+
+/* =========================================
+   PROJECT ROW
+========================================= */
+
+.projects-list {
+  position: absolute;
+
+  width: 52%;
+  left: 38.5%;
+  top: 25%;
+
+  /* quan trọng */
+  overflow: visible;
+}
+
+.project-row {
+  position: relative;
+
+  min-height: 64px;
+  padding: 0 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(255, 255, 255, 0.20);
+
+  border-top: 1px solid rgba(255, 255, 255, 0.9);
+
+  color: white;
+  text-decoration: none;
+
+  font-family: "Instrument Sans", sans-serif;
+
+  transform: scale(1);
+
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.28s ease;
+
+  transform-origin: center;
+
+  z-index: 1;
+}
+
+.project-row:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+
+/* PROJECT NAME */
+
+.project-name {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  font-family: "Instrument Sans", sans-serif;
+  font-size: clamp(22px, 1.8vw, 30px);
+  font-weight: 500;
+  letter-spacing: -0.5px;
+
+  white-space: nowrap;
+
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.project-number {
+  font-family: "Instrument Sans", sans-serif;
+  font-weight: 400;
+}
+
+
+/* CATEGORY */
+
+.project-category {
+  font-family: "Instrument Sans", sans-serif;
+
+  font-size: 14px;
+  font-weight: 100;
+  font-style: italic;
+
+  line-height: 1.05;
+  text-align: right;
+
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+
+/* =========================================
+   PROJECT HOVER
+========================================= */
+
+.project-row {
+  position: relative;
+  z-index: 1;
+
+  transform: scale(1);
+
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease;
+
+  transform-origin: center;
+}
+
+
+/* ROW ĐANG HOVER NỔI TRÊN TẤT CẢ ROW KHÁC */
+
+.project-row:hover {
+  z-index: 900;
+
+  transform: scale(1.06);
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.32);
+}
+
+
+/* TITLE */
+
+.project-title {
+  display: inline-block;
+
+  transform: translateX(0);
+
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* CHỈ TITLE XÍCH SANG PHẢI */
+
+.project-row:hover .project-title {
+  transform: translateX(20px);
+}
+
+/* =========================================
+   ACTIVELY UPDATING
+========================================= */
+
+.projects-updating {
+  position: absolute;
+
+  left: 8%;
+  bottom: 32%;
+
+  margin: 0;
+
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+  font-style: italic;
+}
+
+/* =========================================
+   PROJECT CURSOR PREVIEW
+========================================= */
+
+.project-preview {
+  position: fixed;
+
+  left: 0;
+  top: 0;
+
+  width: 220px;
+
+  pointer-events: none;
+
+  opacity: 0;
+  visibility: hidden;
+
+  z-index: 1000;
+
+  transform:
+    translate(20px, 20px)
+    scale(0.9);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.2s;
+}
+
+
+.project-preview img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  border-radius: 7px;
+}
+
+
+/* PREVIEW VISIBLE */
+
+.project-preview.is-visible {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translate(20px, -150px)
+    scale(1);
+}
+
+
+/* MOBILE: no cursor preview */
+
+@media (max-width: 800px) {
+
+  .project-preview {
+    display: none;
+  }
+
+}
+
+/* =========================================
+   PROJECTS — MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+  /* ---------- PAGE ---------- */
+
+  .projects-page {
+    min-height: 100dvh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+
+  /* ---------- MAIN ---------- */
+
+  .projects-main {
+    position: relative;
+
+    width: 100%;
+    height: 100dvh;
+  }
+
+
+  /* ---------- HEADING ---------- */
+
+  .projects-heading {
+    top: 3%;
+    left: 8%;
+
+    width: auto;
+  }
+
+
+  .projects-heading h1 {
+    font-size: 46px;
+    line-height: 0.95;
+  }
+
+
+  .projects-heading p {
+    margin-top: 10px;
+
+    font-size: 14px;
+  }
+
+
+  /* ---------- STAR ---------- */
+
+  .projects-star {
+    width: 22px;
+    height: 22px;
+
+    top: 10%;
+    right: 9%;
+  }
+
+
+  /* ---------- PROJECT LIST ---------- */
+
+  .projects-list {
+    top: 20%;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 84%;
+
+    overflow: visible;
+  }
+
+
+  /* ---------- ROW ---------- */
+
+  .project-row {
+    width: 100%;
+
+    min-height: 58px;
+
+    padding: 0 8px;
+  }
+
+
+
+  /* ---------- PROJECT NAME ---------- */
+
+  .project-name {
+    gap: 7px;
+
+    font-size: clamp(15px, 4.1vw, 19px);
+
+    letter-spacing: -0.3px;
+  }
+
+
+  .project-number {
+    flex-shrink: 0;
+  }
+
+
+  .project-title {
+    white-space: nowrap;
+  }
+
+
+  /* ---------- CATEGORY ---------- */
+
+  .project-category {
+    margin-left: 8px;
+
+    font-size: clamp(10px, 2.8vw, 13px);
+
+    line-height: 1.05;
+  }
+
+
+  /* ---------- UPDATING ---------- */
+
+  .projects-updating {
+    opacity: 0;
+  }
+
+
+  /* ---------- CURSOR PREVIEW OFF ---------- */
+
+  .project-preview {
+    display: none;
+  }
+
+}
+
+/* =========================================
+   PROJECT DETAIL MODAL
+========================================= */
+
+.project-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 5000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
+/* DARK BACKGROUND */
+
+.project-modal-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.25);
+
+  opacity: 0;
+
+  transition: opacity 0.35s ease;
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.project-modal-card {
+  position: relative;
+
+  width: min(1000px, 76vw);
+  height: min(525px, 70vh);
+
+  background: #ffffff;
+  color: #1b5b93;
+
+  border-radius: 15px;
+
+  display: grid;
+
+  grid-template-columns:
+    42% 58%;
+
+  padding: 30px;
+
+  opacity: 0;
+
+  transform: scale(0.92);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+  z-index: 1;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   OPEN
+========================================= */
+
+.project-modal.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+
+.project-modal.is-open
+.project-modal-backdrop {
+  opacity: 1;
+}
+
+
+.project-modal.is-open
+.project-modal-card {
+  opacity: 1;
+
+  transform: scale(1);
+}
+
+
+/* =========================================
+   LEFT INFORMATION
+========================================= */
+
+.project-modal-info {
+  position: relative;
+
+  padding-right: 35px;
+
+  border-right: 1px solid
+    rgba(112, 74, 72, 0.25);
+
+  font-family:
+    "Instrument Sans",
+    sans-serif;
+}
+
+
+.modal-number {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 14px;
+  font-style: italic;
+}
+
+
+.modal-title {
+  margin: 0;
+
+  font-family:
+    "Instrument Sans",
+    sans-serif;
+
+  font-size: clamp(20px, 2vw, 27px);
+
+  font-weight: 550;
+  letter-spacing: -0.5px;
+
+  white-space: nowrap;
+}
+
+
+/* DESCRIPTION */
+
+.modal-description-block {
+  margin-top: 35px;
+}
+
+
+.modal-description-block h3,
+.modal-software-block h3 {
+
+  margin-bottom: 15px;
+
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+}
+
+
+.modal-description-block p {
+
+  max-width: 330px;
+
+  font-size: 12px;
+  line-height: 1.25;
+
+  font-weight: 400;
+}
+
+
+/* SOFTWARE */
+
+.modal-software-block {
+  position: absolute;
+
+  left: 0;
+  bottom: 20px;
+}
+
+
+.modal-software {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+}
+
+
+.software-dot {
+  opacity: 0.8;
+}
+
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.project-modal-visual {
+  position: relative;
+
+  padding-left: 35px;
+  padding-right: 8px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  min-height: 0;
+
+  /* chừa chỗ dưới cho previous / next */
+  padding-bottom: 70px;
+}
+
+
+.modal-image {
+  width: 100%;
+  max-height: 310px;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+
+/* =========================================
+   PREVIOUS / NEXT
+========================================= */
+
+.modal-navigation {
+  position: absolute;
+
+  left: 42%;
+  right: 0;
+  bottom: 0;
+
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 25px;        /* 55px → 30px: previous và next gần nhau hơn */
+
+  padding: 0 30px;   /* 55px → 8px: cả cụm xích sang phải */
+
+  background: white;
+
+  z-index: 20;
+  box-sizing: border-box;
+}
+
+.modal-nav-button {
+  appearance: none;
+
+  border: 0;
+  background: none;
+
+  padding: 5px;
+
+  color: #1b5b93;
+
+  font-family:
+    "Instrument Sans",
+    sans-serif;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition: transform 0.25s ease;
+}
+
+
+.modal-nav-button:hover {
+  transform: scale(1.1);
+}
+
+
+/* prevent page interaction while modal open */
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* =========================================
+   MODAL MEDIA
+========================================= */
+
+.modal-media {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 14px;
+}
+
+
+/* tất cả image / gif */
+
+.modal-media-item {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: cover;
+}
+
+
+/* ảnh lớn */
+
+.modal-media-main {
+  grid-column: 1 / -1;
+}
+
+
+/* 2 GIF dưới */
+
+.modal-media-half {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.project-modal-visual {
+  scrollbar-width: none;
+}
+
+.project-modal-visual::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================================
+   ABOUT MOBILE — HIDE SCROLLBAR
+========================================= */
+
+@media (max-width: 800px) {
+
+  /* Firefox */
+  html,
+  body,
+  .about-page {
+    scrollbar-width: none;
+  }
+
+  /* Chrome / Safari / Edge */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  .about-page::-webkit-scrollbar {
+    display: none;
+  }
+
+}
+
+/* =========================================
+   MODAL YOUTUBE VIDEO
+========================================= */
+
+.modal-video-wrap {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  grid-column: 1 / -1;
+
+  overflow: hidden;
+  background: black;
+}
+
+
+.modal-video-wrap iframe {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  border: 0;
+}
+
+.modal-media img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* =========================================
+   PROJECT MODAL — MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+  /* =========================
+     WHOLE OVERLAY
+  ========================= */
+
+  .project-modal {
+    align-items: center;
+
+    padding: 0 14px;
+  }
+
+
+  /* =========================
+     CARD
+  ========================= */
+
+  .project-modal-card {
+    width: calc(100vw - 28px);
+
+    height: auto;
+    max-height: 72dvh;
+
+    
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scrollbar-width: none;
+  }
+
+  .project-modal-card::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  /* =========================
+     LEFT INFO
+  ========================= */
+
+  .project-modal-info {
+    width: 100%;
+
+    padding-right: 0;
+
+    border-right: none;
+  }
+
+
+  .modal-number {
+    font-size: 11px;
+
+    margin-bottom: 7px;
+  }
+
+
+  .modal-title {
+    font-size: 18px;
+
+    line-height: 1.05;
+
+    white-space: normal;
+  }
+
+
+  /* DESCRIPTION */
+
+  .modal-description-block {
+    margin-top: 30px;
+  }
+
+
+  .modal-description-block h3,
+  .modal-software-block h3 {
+    font-size: 11px;
+
+    margin-bottom: 15px;
+  }
+
+
+  .modal-description-block p {
+    max-width: none;
+
+    width: 100%;
+
+    font-size: 11px;
+    line-height: 1.25;
+  }
+
+
+  /* =========================
+     SOFTWARE
+  ========================= */
+
+  .modal-software-block {
+    position: static;
+
+    margin-top: 30px;
+  }
+
+
+  .modal-software {
+    font-size: 11px;
+
+    gap: 12px;
+
+    white-space: normal;
+    flex-wrap: wrap;
+  }
+
+
+  /* =========================
+     MEDIA AREA
+  ========================= */
+
+  .project-modal-visual {
+    width: 100%;
+
+    margin-top: 30px;
+
+    padding: 0;
+
+    overflow: visible;
+
+    min-height: auto;
+  }
+
+
+  .modal-media {
+    width: 100%;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+  }
+
+
+  /* main image / youtube takes whole row */
+
+  .modal-media-main,
+  .modal-video-wrap {
+    grid-column: 1 / -1;
+  }
+
+
+  .modal-media-item,
+  .modal-media-half {
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+  }
+
+
+/* =========================
+   PREVIOUS / NEXT
+   HIDE ON MOBILE
+========================= */
+
+.modal-navigation {
+  display: none;
+}
+
+}

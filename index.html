@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>myhang's portfolio</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/svg+xml" href="assets/star-black.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+  <!-- =========================
+       INTRO LOADER
+  ========================== -->
+
+  <div class="intro-loader" id="introLoader">
+
+    <div class="loader-center">
+
+      <img
+        src="assets/star-blue.svg"
+        class="loader-star"
+        alt=""
+      >
+
+      <div class="loader-text">
+        LOADING<span class="loading-dots" id="loadingDots">.</span>
+      </div>
+
+    </div>
+
+    <p class="loader-sound-note">
+      ( sound on for the best experience! )
+    </p>
+
+  </div>
+    <header>
+      <nav class="navbar">
+
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+          <img src="assets/logo.svg" alt="My Hang logo" />
+        </a>
+
+        <!-- Navigation -->
+        <div class="navigation">
+
+  <a href="about.html" class="nav-magnetic">
+    <span class="nav-text-wrap">
+      <span class="nav-text nav-text-current">( about )</span>
+      <span class="nav-text nav-text-new">( about )</span>
+    </span>
+  </a>
+
+  <a href="projects.html" class="nav-magnetic">
+    <span class="nav-text-wrap">
+      <span class="nav-text nav-text-current">( projects )</span>
+      <span class="nav-text nav-text-new">( projects )</span>
+    </span>
+  </a>
+
+  <a class="nav-magnetic">
+    <span class="nav-text-wrap">
+      <span class="nav-text nav-text-current">( contact )</span>
+      <span class="nav-text nav-text-new">( contact )</span>
+    </span>
+  </a>
+
+</div>
+
+      </nav>
+    </header>
+
+    <main>
+ <section class="hero">
+
+  <div class="hero-title">
+
+    <!-- TOP ROW -->
+    <div class="hero-name-group">
+      <p class="hero-hello">hello there, i am</p>
+      <h1 class="hero-name">my hang</h1>
+    </div>
+
+    <p class="hero-multi">
+      multi-<br>
+      disciplinary
+    </p>
+
+    <p class="hero-designer">designer</p>
+
+
+    <!-- BOTTOM ROW -->
+    <p class="hero-welcome">
+      <strong>welcome</strong>
+      <span>to my</span>
+    </p>
+
+    <div class="hero-portfolio-wrap">
+      <span class="hero-bracket hero-bracket-left">(</span>
+
+      <h2 class="hero-portfolio">portfolio</h2>
+
+      <span class="hero-bracket hero-bracket-right">)</span>
+
+      <span class="hero-year">2026.</span>
+    </div>
+
+  </div>
+
+</section>  
+    </main>
+
+<footer class="footer">
+
+  <!-- Sound control -->
+  <div class="sound-control" id="soundControl">
+    <div class="sound-icon" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <span class="sound-label">sound: off</span>
+  </div>
+
+  <!-- Left line -->
+  <div class="footer-line"></div>
+
+  <!-- Tagline -->
+  <p class="footer-tagline">
+    a little world of things i make.
+  </p>
+
+  <!-- Right line -->
+  <div class="footer-line footer-line-short"></div>
+
+</footer>
+
+<!-- Background music -->
+<audio
+  id="bgMusic"
+  src="audio/music.mp3"
+  loop>
+</audio>
+
+<!-- PAGE TRANSITION -->
+<div class="page-transition" id="pageTransition">
+  <img
+    src="assets/star-blue.svg"
+    class="transition-star"
+    alt=""
+  >
+</div>
+
+<script src="script.js"></script>
+
+  </body>
+</html>

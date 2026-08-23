@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>my projects~</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body class="projects-page">
+
+
+  <!-- =========================
+       BACKGROUND
+  ========================== -->
+
+  <div class="projects-background"></div>
+
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header>
+  <nav class="navbar">
+
+    <!-- LOGO -->
+    <a href="index.html" class="logo">
+      <img src="assets/logo.svg" alt="My Hang logo">
+    </a>
+
+
+    <div class="navigation">
+
+      <!-- ABOUT -->
+      <a href="about.html" class="nav-magnetic">
+
+        <span class="nav-text-wrap">
+
+          <span class="nav-text nav-text-current">
+            ( about )
+          </span>
+
+          <span class="nav-text nav-text-new">
+            ( about )
+          </span>
+
+        </span>
+
+      </a>
+
+
+      <!-- PROJECTS = CURRENT PAGE -->
+      <a class="nav-current" aria-current="page">
+
+        <span class="nav-text-wrap">
+
+          <span class="nav-text">
+            ( projects )
+          </span>
+
+        </span>
+
+      </a>
+
+
+      <!-- CONTACT -->
+      <a class="nav-magnetic">
+
+        <span class="nav-text-wrap">
+
+          <span class="nav-text nav-text-current">
+            ( contact )
+          </span>
+
+          <span class="nav-text nav-text-new">
+            ( contact )
+          </span>
+
+        </span>
+
+      </a>
+
+    </div>
+
+  </nav>
+</header>
+
+
+
+  <!-- =========================
+       PROJECTS
+  ========================== -->
+
+  <main class="projects-main">
+
+
+    <!-- TITLE -->
+
+    <div class="projects-heading">
+
+      <h1>
+        selected works
+      </h1>
+
+      <p>
+        a few favourites of mine. click to see more details!
+      </p>
+
+    </div>
+
+
+    <!-- STAR -->
+
+    <img
+      src="assets/star-white.svg"
+      alt=""
+      class="projects-star"
+    >
+
+
+
+    <!-- =========================
+         PROJECT LIST
+    ========================== -->
+
+    <div class="projects-list">
+
+
+      <!-- PROJECT 1 -->
+
+      <a
+        href="#"
+        class="project-row"
+        data-preview="assets/project-1-preview.png"
+      >
+
+        <div class="project-name">
+
+          <span class="project-number">
+            ( 1 )
+          </span>
+
+          <span class="project-title">
+            JEONGWOL DAEBOREUM
+          </span>
+
+        </div>
+
+        <span class="project-category">
+          illustration
+        </span>
+
+      </a>
+
+
+
+      <!-- PROJECT 2 -->
+
+      <a
+        href="#"
+        class="project-row"
+        data-preview="assets/project-2-preview.png"
+      >
+
+        <div class="project-name">
+
+          <span class="project-number">
+            ( 2 )
+          </span>
+
+          <span class="project-title">
+            HEART THERAPY
+          </span>
+
+        </div>
+
+        <span class="project-category">
+          interactive<br>
+          infographic
+        </span>
+
+      </a>
+
+
+
+      <!-- PROJECT 3 -->
+
+      <a
+        href="#"
+        class="project-row"
+     data-preview="assets/project-3-preview.png"
+      >
+
+        <div class="project-name">
+
+          <span class="project-number">
+            ( 3 )
+          </span>
+
+          <span class="project-title">
+            MOLÉCHÈ
+          </span>
+
+        </div>
+
+        <span class="project-category">
+          web design
+        </span>
+
+      </a>
+
+
+
+      <!-- PROJECT 4 -->
+
+      <a
+        href="#"
+        class="project-row"
+         data-preview="assets/project-4-preview.png"
+      >
+
+        <div class="project-name">
+
+          <span class="project-number">
+            ( 4 )
+          </span>
+
+          <span class="project-title">
+            THE LITTLE SNAIL
+          </span>
+
+        </div>
+
+        <span class="project-category">
+          web poem
+        </span>
+
+      </a>
+
+
+
+      <!-- PROJECT 5 -->
+
+      <a
+        href="#"
+        class="project-row"
+         data-preview="assets/project-5-preview.png"
+      >
+
+        <div class="project-name">
+
+          <span class="project-number">
+            ( 5 )
+          </span>
+
+          <span class="project-title">
+            THE SUBMISSION
+          </span>
+
+        </div>
+
+        <span class="project-category">
+          short film
+        </span>
+
+      </a>
+
+    </div>
+
+
+
+    <!-- UPDATING -->
+
+    <p class="projects-updating">
+      actively updating...
+    </p>
+
+
+  </main>
+
+<!-- =========================
+     PROJECT DETAIL MODAL
+========================== -->
+
+<div class="project-modal" id="projectModal">
+
+  <!-- dark overlay -->
+  <div class="project-modal-backdrop"></div>
+
+  <!-- popup -->
+  <div class="project-modal-card">
+
+    <!-- LEFT SIDE -->
+    <div class="project-modal-info">
+
+      <span class="modal-number" id="modalNumber">
+        ( 1 )
+      </span>
+
+      <h2 class="modal-title" id="modalTitle">
+        JEONGWOL DAEBOREUM
+      </h2>
+
+
+      <div class="modal-description-block">
+
+        <h3>DESCRIPTION</h3>
+
+        <p id="modalDescription">
+        </p>
+
+      </div>
+
+
+      <div class="modal-software-block">
+
+        <h3>SOFTWARE</h3>
+
+        <div
+          class="modal-software"
+          id="modalSoftware"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+<div class="project-modal-visual">
+
+  <div
+    class="modal-media"
+    id="modalMedia"
+  ></div>
+
+</div>
+
+
+    <!-- NAVIGATION -->
+    <div class="modal-navigation">
+
+      <button
+        class="modal-nav-button"
+        id="modalPrevious"
+        type="button"
+      >
+        ← PREVIOUS
+      </button>
+
+      <button
+        class="modal-nav-button"
+        id="modalNext"
+        type="button"
+      >
+        NEXT →
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+  <!-- =========================
+       SOUND CONTROL
+  ========================== -->
+
+  <footer class="footer">
+
+  <div
+    class="sound-control is-muted"
+    id="soundControl"
+  >
+
+    <div class="sound-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <span class="sound-label">
+      sound: off
+    </span>
+
+  </div>
+
+
+  <div class="footer-line"></div>
+
+
+  <p class="footer-tagline">
+    projects
+  </p>
+
+
+  <div class="footer-line footer-line-short"></div>
+
+</footer>
+
+
+  <audio
+    id="bgMusic"
+    src="audio/music.mp3"
+    loop
+  ></audio>
+
+<div class="project-preview" id="projectPreview">
+  <img
+    src=""
+    alt=""
+    id="projectPreviewImage"
+  >
+</div>
+
+<!-- PAGE TRANSITION -->
+
+<div
+  class="page-transition"
+  id="pageTransition"
+>
+  <img
+    src="assets/star-blue.svg"
+    class="transition-star"
+    alt=""
+  >
+</div>
+  <script src="projects.js"></script>
+
+</body>
+
+</html>
