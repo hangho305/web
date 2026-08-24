@@ -2810,11 +2810,23 @@ body.modal-open {
   top: 0;
   left: 0;
 
+  /* 100% would track the shrinking viewport, so the canvas resized every time
+     the mobile URL bar collapsed on a drag. lvh is the URL-bar-hidden height,
+     so the canvas keeps one constant size and covers the page either way. */
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  height: 100lvh;
 
   display: block;
   z-index: -1;
 
+  overflow: hidden;
   pointer-events: none;
+  touch-action: none;
+}
+
+/* Stop the overscroll bounce from dragging the fixed canvas around on mobile.
+   Scoped to the page that actually has the canvas. */
+body:has(#scene3d) {
+  overscroll-behavior: none;
 }
