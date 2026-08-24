@@ -1,0 +1,205 @@
+{
+ "format": "quantized-v1",
+ "buffer": "instances.bin",
+ "stride": 16,
+ "prototypeFile": "prototypes.glb",
+ "layout": {
+  "position": "uint16[3] -> positionMin + v / 65535 * positionSpan",
+  "quaternion": "int16[4] -> v / 32767, renormalized",
+  "scale": "uint16[1] -> scaleMin + v / 65535 * scaleSpan"
+ },
+ "prototypes": {
+  "Rock_1": {
+   "count": 969,
+   "byteOffset": 0,
+   "positionMin": [
+    8.858124,
+    0.72128,
+    -19.095444
+   ],
+   "positionSpan": [
+    54.519119,
+    2.131891,
+    50.590479
+   ],
+   "scaleMin": 0.048395,
+   "scaleSpan": 1.400081
+  },
+  "bush_1": {
+   "count": 7,
+   "byteOffset": 15504,
+   "positionMin": [
+    10.486662,
+    0.208993,
+    -22.21578
+   ],
+   "positionSpan": [
+    30.834322,
+    2.030247,
+    54.337126
+   ],
+   "scaleMin": 2.500131,
+   "scaleSpan": 4.533969
+  },
+  "bush_1.001": {
+   "count": 18,
+   "byteOffset": 15616,
+   "positionMin": [
+    8.442099,
+    0.319009,
+    -21.258821
+   ],
+   "positionSpan": [
+    54.324984,
+    2.122198,
+    54.605169
+   ],
+   "scaleMin": 2.500131,
+   "scaleSpan": 5.524537
+  },
+  "bush_1.002": {
+   "count": 6,
+   "byteOffset": 15904,
+   "positionMin": [
+    7.642532,
+    0.31559,
+    -18.173491
+   ],
+   "positionSpan": [
+    33.033482,
+    2.471875,
+    13.923266
+   ],
+   "scaleMin": 3.357752,
+   "scaleSpan": 3.681936
+  },
+  "flower_1": {
+   "count": 137,
+   "byteOffset": 16000,
+   "positionMin": [
+    7.934006,
+    0.069184,
+    -22.287346
+   ],
+   "positionSpan": [
+    54.508682,
+    2.30042,
+    56.95435
+   ],
+   "scaleMin": 2.227401,
+   "scaleSpan": 0.562748
+  },
+  "flower_2": {
+   "count": 155,
+   "byteOffset": 18192,
+   "positionMin": [
+    8.193075,
+    0.126383,
+    -22.482992
+   ],
+   "positionSpan": [
+    54.402884,
+    2.2342,
+    57.248457
+   ],
+   "scaleMin": 2.225912,
+   "scaleSpan": 0.574237
+  },
+  "flower_3": {
+   "count": 166,
+   "byteOffset": 20672,
+   "positionMin": [
+    7.727983,
+    0.087278,
+    -23.357866
+   ],
+   "positionSpan": [
+    55.329973,
+    2.228618,
+    58.039263
+   ],
+   "scaleMin": 2.224219,
+   "scaleSpan": 0.569779
+  },
+  "flower_4": {
+   "count": 181,
+   "byteOffset": 23328,
+   "positionMin": [
+    8.242002,
+    0.217489,
+    -23.194618
+   ],
+   "positionSpan": [
+    54.651724,
+    2.002286,
+    56.6381
+   ],
+   "scaleMin": 2.223893,
+   "scaleSpan": 0.570168
+  },
+  "grass_sample_1": {
+   "count": 25628,
+   "byteOffset": 26224,
+   "positionMin": [
+    7.514217,
+    0.016266,
+    -23.565172
+   ],
+   "positionSpan": [
+    55.956028,
+    2.832889,
+    58.533266
+   ],
+   "scaleMin": 0.000176,
+   "scaleSpan": 1.738199
+  },
+  "grass_sample_2": {
+   "count": 25486,
+   "byteOffset": 436272,
+   "positionMin": [
+    7.479393,
+    0.026917,
+    -23.607016
+   ],
+   "positionSpan": [
+    55.965446,
+    2.823586,
+    58.572298
+   ],
+   "scaleMin": 0.000161,
+   "scaleSpan": 1.73824
+  },
+  "grass_sample_3": {
+   "count": 25415,
+   "byteOffset": 844048,
+   "positionMin": [
+    7.48509,
+    0.020535,
+    -23.595806
+   ],
+   "positionSpan": [
+    55.989679,
+    2.829048,
+    58.552101
+   ],
+   "scaleMin": 0.000128,
+   "scaleSpan": 1.738263
+  },
+  "grass_sample_4": {
+   "count": 25267,
+   "byteOffset": 1250688,
+   "positionMin": [
+    7.511387,
+    0.029161,
+    -23.603695
+   ],
+   "positionSpan": [
+    55.931328,
+    2.819845,
+    58.568092
+   ],
+   "scaleMin": 1.2e-05,
+   "scaleSpan": 1.738395
+  }
+ }
+}

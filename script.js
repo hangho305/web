@@ -303,6 +303,8 @@ const dotAnimation = setInterval(() => {
 
 window.addEventListener("load", () => {
 
+  (window.scene3dReady || Promise.resolve()).then(() => {
+
   /*
     Cho loader tồn tại tối thiểu một chút
     để animation không flash quá nhanh.
@@ -328,6 +330,8 @@ window.addEventListener("load", () => {
 
 
   }, 1200);
+
+  });
 
 });
 
