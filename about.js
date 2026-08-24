@@ -1,7 +1,4 @@
 
-/* =========================================
-   ABOUT MOBILE SCROLL TRANSITION
-========================================= */
 
 const aboutMobileScroll =
   document.querySelector(".about-mobile-scroll");
@@ -11,9 +8,7 @@ if (aboutMobileScroll) {
 
   function updateAboutMobile() {
 
-    /*
-      Only run mobile behaviour
-    */
+    
 
     if (window.innerWidth > 800) {
 
@@ -27,23 +22,11 @@ if (aboutMobileScroll) {
       aboutMobileScroll.getBoundingClientRect();
 
 
-    /*
-      total scrollable distance inside
-      the 200vh about section
-    */
 
     const scrollDistance =
       aboutMobileScroll.offsetHeight -
       window.innerHeight;
 
-
-    /*
-      how far through the about mobile
-      section we have scrolled
-
-      0 = intro
-      1 = details
-    */
 
     const progress =
       Math.min(
@@ -52,9 +35,6 @@ if (aboutMobileScroll) {
       );
 
 
-    /*
-      halfway → switch panels
-    */
 
     if (progress > 0.15) {
 
@@ -90,9 +70,7 @@ if (aboutMobileScroll) {
 
 }
 
-/* =========================
-   NAV HOVER SOUND
-========================= */
+
 
 const hoverSound = new Audio("audio/hover-sound.mp3");
 
@@ -108,15 +86,11 @@ hoverTargets.forEach((item) => {
     hoverSound.currentTime = 0;
 
     hoverSound.play().catch(() => {
-      // Browser may block audio before first user interaction
     });
 
   });
 });
 
-/* =========================
-   MAGNETIC NAVIGATION
-========================= */
 
 const magneticLinks =
   document.querySelectorAll(".nav-magnetic");
@@ -127,27 +101,15 @@ magneticLinks.forEach((link) => {
 
     const rect = link.getBoundingClientRect();
 
-    /*
-      vị trí tâm của button
-    */
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
 
-    /*
-      cursor cách tâm bao nhiêu
-    */
     const mouseX = event.clientX - centerX;
     const mouseY = event.clientY - centerY;
 
 
-    /*
-      MAGNETIC STRENGTH
-
-      0.12 = rất nhẹ
-      0.18 = recommend
-      0.25 = rõ hơn
-    */
+    
     const strength = 0.18;
 
     const moveX = mouseX * strength;
@@ -160,7 +122,6 @@ magneticLinks.forEach((link) => {
   });
 
 
-  /* cursor rời button → trở về */
 
   link.addEventListener("mouseleave", () => {
 
@@ -208,9 +169,6 @@ soundControl.addEventListener("click", () => {
   }
 });
 
-/* =========================================
-   RESUME OVERLAY
-========================================= */
 
 const resumeOverlay =
   document.getElementById("resumeOverlay");
@@ -222,15 +180,12 @@ const computerButtons =
   document.querySelectorAll(".about-computer");
 
 
-/* PAPER SOUND */
-
 const resumeSound =
   new Audio("audio/resume-sound.mp3");
 
 resumeSound.volume = 0.5;
 
 
-/* OPEN */
 
 computerButtons.forEach((computer) => {
 
@@ -242,19 +197,15 @@ computerButtons.forEach((computer) => {
     resumeSound.currentTime = 0;
 
     resumeSound.play().catch(() => {
-      // browser may block audio
     });
 
 
-    /* open resume */
     resumeOverlay.classList.add("is-open");
 
   });
 
 });
 
-
-/* CLICK OUTSIDE → CLOSE */
 
 resumeOverlay.addEventListener("click", () => {
 
@@ -263,7 +214,6 @@ resumeOverlay.addEventListener("click", () => {
 });
 
 
-/* CLICK RESUME → DON'T CLOSE */
 
 resumeImage.addEventListener("click", (event) => {
 
@@ -272,7 +222,6 @@ resumeImage.addEventListener("click", (event) => {
 });
 
 
-/* ESC → CLOSE */
 
 document.addEventListener("keydown", (event) => {
 
@@ -284,14 +233,10 @@ document.addEventListener("keydown", (event) => {
 
 });
 
-/* =========================================
-   COMPUTER HOVER + MAGNETIC
-========================================= */
 
 const computers =
   document.querySelectorAll(".about-computer");
 
-/* reuse hover sound */
 const computerHoverSound =
   new Audio("audio/hover-sound.mp3");
 
@@ -300,24 +245,17 @@ computerHoverSound.volume = 0.25;
 
 computers.forEach((computer) => {
 
-  /* -------------------------
-     HOVER SOUND
-  ------------------------- */
 
   computer.addEventListener("mouseenter", () => {
 
     computerHoverSound.currentTime = 0;
 
     computerHoverSound.play().catch(() => {
-      // browser may block audio before interaction
     });
 
   });
 
 
-  /* -------------------------
-     FOLLOW CURSOR
-  ------------------------- */
 
   computer.addEventListener("mousemove", (event) => {
 
@@ -337,12 +275,6 @@ computers.forEach((computer) => {
       event.clientY - centerY;
 
 
-    /*
-      nhỏ hơn navbar một chút
-      0.08 = subtle
-      0.12 = recommend
-      0.18 = rõ
-    */
 
     const strength = 0.12;
 
@@ -356,9 +288,6 @@ computers.forEach((computer) => {
   });
 
 
-  /* -------------------------
-     RESET
-  ------------------------- */
 
   computer.addEventListener("mouseleave", () => {
 
@@ -369,9 +298,6 @@ computers.forEach((computer) => {
 
 });
 
-/* =========================================
-   PAGE TRANSITION
-========================================= */
 
 const pageTransition =
   document.getElementById("pageTransition");
@@ -391,7 +317,6 @@ if (pageTransition) {
 
   if (shouldPlayTransition === "true") {
 
-    /* dùng flag xong thì xoá ngay */
     sessionStorage.removeItem(
       "pageTransitionActive"
     );
@@ -414,16 +339,12 @@ if (pageTransition) {
 
   } else {
 
-    /* page không đến từ circle transition */
     pageTransition.style.display = "none";
 
   }
 
 }
 
-/* =========================================
-   CLICK NAVIGATION
-========================================= */
 
 const transitionLinks =
   document.querySelectorAll(
@@ -440,16 +361,10 @@ transitionLinks.forEach((link) => {
       link.getAttribute("href");
 
 
-    /*
-      Không có href thì bỏ qua
-    */
 
     if (!destination) return;
 
 
-    /*
-      Ngăn browser chuyển page ngay lập tức
-    */
 
     event.preventDefault();
 
@@ -459,14 +374,11 @@ transitionLinks.forEach((link) => {
 );
 
 
-    /* SOUND */
-
     transitionSound.currentTime = 0;
 
     transitionSound.play().catch(() => {});
 
 
-    /* SHOW TRANSITION */
 
     pageTransition.classList.remove(
       "is-hidden"
@@ -477,16 +389,93 @@ transitionLinks.forEach((link) => {
     );
 
 
-    /*
-      Chờ vòng tròn cover screen
-      rồi mới chuyển page
-    */
 
     setTimeout(() => {
 
       window.location.href = destination;
 
     }, 850);
+
+  });
+
+});
+
+
+const draggableStatements =
+  document.querySelectorAll(".about-statement > span");
+
+draggableStatements.forEach((item) => {
+
+  let isDragging = false;
+  let startMouseX = 0;
+  let startMouseY = 0;
+
+  let startX = 0;
+  let startY = 0;
+
+  let x = 0;
+  let y = 0;
+
+
+  item.addEventListener("pointerdown", (event) => {
+
+    /* desktop only */
+    if (window.innerWidth <= 800) return;
+
+    isDragging = true;
+
+    startMouseX = event.clientX;
+    startMouseY = event.clientY;
+
+    startX = x;
+    startY = y;
+
+    item.classList.add("is-dragging");
+
+    item.setPointerCapture(event.pointerId);
+
+    event.preventDefault();
+
+  });
+
+
+  item.addEventListener("pointermove", (event) => {
+
+    if (!isDragging) return;
+
+    const deltaX =
+      event.clientX - startMouseX;
+
+    const deltaY =
+      event.clientY - startMouseY;
+
+    x = startX + deltaX;
+    y = startY + deltaY;
+
+    item.style.transform =
+      `translate3d(${x}px, ${y}px, 0)`;
+
+  });
+
+
+  item.addEventListener("pointerup", (event) => {
+
+    if (!isDragging) return;
+
+    isDragging = false;
+
+    item.classList.remove("is-dragging");
+
+    item.releasePointerCapture(event.pointerId);
+
+  });
+
+
+  item.addEventListener("pointercancel", () => {
+
+    isDragging = false;
+
+    item.classList.remove("is-dragging");
 
   });
 

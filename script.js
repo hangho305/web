@@ -1,6 +1,4 @@
-/* =========================================
-   BACKGROUND MUSIC — HOME ONLY
-========================================= */
+
 
 const soundControl = document.getElementById("soundControl");
 const bgMusic = document.getElementById("bgMusic");
@@ -11,9 +9,6 @@ bgMusic.volume = 0.4;
 let isPlaying = false;
 
 
-/* =========================
-   SOUND ON
-========================= */
 
 async function turnSoundOn() {
 
@@ -30,7 +25,6 @@ async function turnSoundOn() {
 
   } catch (error) {
 
-    /* browser blocked autoplay */
 
     isPlaying = false;
 
@@ -44,9 +38,6 @@ async function turnSoundOn() {
 }
 
 
-/* =========================
-   SOUND OFF
-========================= */
 
 function turnSoundOff() {
 
@@ -62,10 +53,6 @@ function turnSoundOff() {
 }
 
 
-/* =========================
-   SOUND BUTTON
-========================= */
-
 soundControl.addEventListener("click", () => {
 
   if (isPlaying) {
@@ -77,19 +64,12 @@ soundControl.addEventListener("click", () => {
 });
 
 
-/* =========================
-   TRY AUTOPLAY ON HOME
-========================= */
-
 window.addEventListener("load", () => {
 
   turnSoundOn();
 
 });
 
-/* =========================
-   HERO TEXT WARP
-========================= */
 
 const heroTitle = document.querySelector(".hero-title");
 
@@ -106,9 +86,6 @@ const warpTargets = heroTitle.querySelectorAll(
 );
 
 
-/* -------------------------
-   SPLIT TEXT INTO CHARACTERS
-------------------------- */
 
 function splitTextIntoChars(element) {
   const nodes = Array.from(element.childNodes);
@@ -138,7 +115,6 @@ function splitTextIntoChars(element) {
       node.replaceWith(fragment);
     }
 
-    /* keep things like <br> untouched */
   });
 }
 
@@ -149,22 +125,9 @@ warpTargets.forEach(splitTextIntoChars);
 const chars = heroTitle.querySelectorAll(".warp-char");
 
 
-/* -------------------------
-   SETTINGS
-------------------------- */
-
-/*
-  radius = how large the affected area is
-  strength = how far letters move
-*/
-
 let radius = 120;
 let strength = 18;
 
-
-/* -------------------------
-   MOUSE MOVE
-------------------------- */
 
 heroTitle.addEventListener("mousemove", (event) => {
 
@@ -182,7 +145,6 @@ heroTitle.addEventListener("mousemove", (event) => {
     const charY = rect.top + rect.height / 2;
 
 
-    /* distance between mouse and character */
     const dx = mouseX - charX;
     const dy = mouseY - charY;
 
@@ -191,7 +153,6 @@ heroTitle.addEventListener("mousemove", (event) => {
     );
 
 
-    /* outside warp radius = normal */
     if (distance > radius) {
 
       char.style.transform =
@@ -201,19 +162,11 @@ heroTitle.addEventListener("mousemove", (event) => {
     }
 
 
-    /*
-      influence:
-      1 = directly under mouse
-      0 = edge of radius
-    */
-
     let influence = 1 - distance / radius;
 
-    /* soften falloff */
     influence = influence * influence;
 
 
-    /* pull letters toward cursor */
     const moveX =
       dx * influence * 0.22;
 
@@ -221,9 +174,6 @@ heroTitle.addEventListener("mousemove", (event) => {
       dy * influence * 0.22;
 
 
-    /*
-      stretch based on cursor direction
-    */
 
     const stretchX =
       1 + Math.abs(dx / radius) * influence * 3;
@@ -232,7 +182,6 @@ heroTitle.addEventListener("mousemove", (event) => {
       1 + Math.abs(dy / radius) * influence * 3;
 
 
-    /* subtle rotation */
     const rotate =
       (dx / radius) * influence * 8;
 
@@ -252,10 +201,6 @@ heroTitle.addEventListener("mousemove", (event) => {
 });
 
 
-/* -------------------------
-   RESET WHEN MOUSE LEAVES
-------------------------- */
-
 heroTitle.addEventListener("mouseleave", () => {
 
   heroTitle.classList.add("is-resetting");
@@ -269,17 +214,11 @@ heroTitle.addEventListener("mouseleave", () => {
 
 });
 
-/* =========================================
-   INTRO LOADER
-========================================= */
 
 const introLoader = document.getElementById("introLoader");
 const loadingDots = document.getElementById("loadingDots");
 
 
-/* -------------------------
-   LOADING DOTS
-------------------------- */
 
 let dotCount = 1;
 
@@ -297,18 +236,11 @@ const dotAnimation = setInterval(() => {
 
 
 
-/* -------------------------
-   CLOSE LOADER
-------------------------- */
 
 window.addEventListener("load", () => {
 
   (window.scene3dReady || Promise.resolve()).then(() => {
 
-  /*
-    Cho loader tồn tại tối thiểu một chút
-    để animation không flash quá nhanh.
-  */
 
   setTimeout(() => {
 
@@ -317,10 +249,6 @@ window.addEventListener("load", () => {
     introLoader.classList.add("is-closing");
 
 
-    /*
-      Sau khi exit animation xong
-      remove loader hoàn toàn
-    */
 
     setTimeout(() => {
 
@@ -335,9 +263,6 @@ window.addEventListener("load", () => {
 
 });
 
-/* =========================
-   NAV HOVER SOUND
-========================= */
 
 const hoverSound = new Audio("audio/hover-sound.mp3");
 
@@ -353,15 +278,11 @@ hoverTargets.forEach((item) => {
     hoverSound.currentTime = 0;
 
     hoverSound.play().catch(() => {
-      // Browser may block audio before first user interaction
     });
 
   });
 });
 
-/* =========================
-   MAGNETIC NAVIGATION
-========================= */
 
 const magneticLinks =
   document.querySelectorAll(".nav-magnetic");
@@ -372,27 +293,14 @@ magneticLinks.forEach((link) => {
 
     const rect = link.getBoundingClientRect();
 
-    /*
-      vị trí tâm của button
-    */
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
 
-    /*
-      cursor cách tâm bao nhiêu
-    */
     const mouseX = event.clientX - centerX;
     const mouseY = event.clientY - centerY;
 
 
-    /*
-      MAGNETIC STRENGTH
-
-      0.12 = rất nhẹ
-      0.18 = recommend
-      0.25 = rõ hơn
-    */
     const strength = 0.18;
 
     const moveX = mouseX * strength;
@@ -405,7 +313,6 @@ magneticLinks.forEach((link) => {
   });
 
 
-  /* cursor rời button → trở về */
 
   link.addEventListener("mouseleave", () => {
 
@@ -416,9 +323,6 @@ magneticLinks.forEach((link) => {
 
 });
 
-/* =========================================
-   PAGE TRANSITION
-========================================= */
 
 const pageTransition =
   document.getElementById("pageTransition");
@@ -429,16 +333,10 @@ const transitionSound =
 transitionSound.volume = 0.5;
 
 
-/* HOME LOADS WITHOUT CIRCLE */
-
 if (pageTransition) {
   pageTransition.style.display = "none";
 }
 
-
-/* =========================================
-   ONLY ABOUT + PROJECTS
-========================================= */
 
 const transitionLinks =
   document.querySelectorAll(
@@ -459,7 +357,6 @@ transitionLinks.forEach((link) => {
     event.preventDefault();
 
 
-    /* Tell next page to play reveal */
 
     sessionStorage.setItem(
       "pageTransitionActive",
@@ -467,11 +364,6 @@ transitionLinks.forEach((link) => {
     );
 
 
-/* =========================================
-   PREPARE CIRCLE
-========================================= */
-
-/* cho circle xuất hiện nhưng vẫn đang scale(0) */
 pageTransition.style.display = "flex";
 
 pageTransition.classList.remove("is-entering");
@@ -484,9 +376,6 @@ transitionSound.currentTime = 0;
 transitionSound.play().catch(() => {});
 
 
-/* =========================================
-   NEXT FRAME → CIRCLE GROWS
-========================================= */
 
 requestAnimationFrame(() => {
 
@@ -499,7 +388,6 @@ requestAnimationFrame(() => {
 
 });
 
-    /* CHANGE PAGE */
 
     setTimeout(() => {
 

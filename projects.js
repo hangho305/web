@@ -1,6 +1,3 @@
-/* =========================================
-   PROJECT DATA
-========================================= */
 
 const projects = [
 
@@ -212,10 +209,6 @@ const projects = [
 
 ];
 
-/* =========================================
-   PROJECT ROW
-   HOVER SOUND + CURSOR PREVIEW
-========================================= */
 
 const projectRows =
   document.querySelectorAll(".project-row");
@@ -239,9 +232,6 @@ projectHoverSound.volume = 0.25;
 projectRows.forEach((row) => {
 
 
-  /* =========================
-     MOUSE ENTER
-  ========================= */
 
   row.addEventListener("mouseenter", () => {
 
@@ -254,7 +244,6 @@ projectRows.forEach((row) => {
       .catch(() => {});
 
 
-    /* GET PREVIEW IMAGE */
 
     const preview =
       row.dataset.preview;
@@ -275,9 +264,6 @@ projectRows.forEach((row) => {
 
 
 
-  /* =========================
-     MOUSE MOVE
-  ========================= */
 
   row.addEventListener("mousemove", (event) => {
 
@@ -291,9 +277,6 @@ projectRows.forEach((row) => {
 
 
 
-  /* =========================
-     MOUSE LEAVE
-  ========================= */
 
   row.addEventListener("mouseleave", () => {
 
@@ -305,9 +288,6 @@ projectRows.forEach((row) => {
 
 });
 
-/* =========================================
-   NAV + SOUND HOVER SOUND
-========================================= */
 
 const hoverSound = new Audio("audio/hover-sound.mp3");
 
@@ -335,9 +315,6 @@ hoverTargets.forEach((item) => {
 
 
 
-/* =========================================
-   MAGNETIC NAVIGATION
-========================================= */
 
 const magneticLinks =
   document.querySelectorAll(".nav-magnetic");
@@ -391,9 +368,6 @@ magneticLinks.forEach((link) => {
 
 
 
-/* =========================================
-   SOUND CONTROL
-========================================= */
 
 const soundControl =
   document.getElementById("soundControl");
@@ -476,9 +450,6 @@ soundControl.addEventListener("click", () => {
 
 });
 
-/* =========================================
-   PAGE TRANSITION
-========================================= */
 
 const pageTransition =
   document.getElementById("pageTransition");
@@ -489,9 +460,6 @@ const transitionSound =
 transitionSound.volume = 0.5;
 
 
-/* =========================================
-   WHEN PROJECTS PAGE LOADS
-========================================= */
 
 if (pageTransition) {
 
@@ -534,10 +502,6 @@ if (pageTransition) {
 
 
 
-/* =========================================
-   CLICK NAVIGATION
-========================================= */
-
 const transitionLinks =
   document.querySelectorAll(
     '.navigation a[href="about.html"], ' +
@@ -558,7 +522,6 @@ transitionLinks.forEach((link) => {
     event.preventDefault();
 
 
-    /* tell next page to play reveal */
 
     sessionStorage.setItem(
       "pageTransitionActive",
@@ -566,7 +529,6 @@ transitionLinks.forEach((link) => {
     );
 
 
-    /* transition sound */
 
     transitionSound.currentTime = 0;
 
@@ -575,7 +537,6 @@ transitionLinks.forEach((link) => {
       .catch(() => {});
 
 
-    /* show circle */
 
     pageTransition.style.display = "flex";
 
@@ -588,7 +549,6 @@ transitionLinks.forEach((link) => {
     );
 
 
-    /* change page after circle covers screen */
 
     setTimeout(() => {
 
@@ -600,9 +560,6 @@ transitionLinks.forEach((link) => {
   });
 
 
-  /* =========================================
-   PROJECT DETAIL MODAL
-========================================= */
 
 const projectModal =
   document.getElementById("projectModal");
@@ -635,9 +592,6 @@ const modalNext =
 let currentProjectIndex = 0;
 
 
-/* =========================================
-   SHOW PROJECT
-========================================= */
 
 function showProject(index) {
 
@@ -655,15 +609,11 @@ function showProject(index) {
   modalDescription.textContent =
     project.description;
 
-/* MEDIA */
 
 modalMedia.innerHTML = "";
 
 project.media.forEach((media) => {
 
-  /* =========================
-     YOUTUBE VIDEO
-  ========================= */
 
   if (media.type === "youtube") {
 
@@ -697,9 +647,6 @@ project.media.forEach((media) => {
   }
 
 
-  /* =========================
-     IMAGE / GIF
-  ========================= */
 
   else {
 
@@ -721,7 +668,6 @@ project.media.forEach((media) => {
 });
 
 
-  /* SOFTWARE */
 
   modalSoftware.innerHTML =
     project.software
@@ -729,7 +675,6 @@ project.media.forEach((media) => {
       .join('<span class="software-dot">•</span>');
 
 
-  /* open modal */
 
   projectModal.classList.add("is-open");
 
@@ -740,9 +685,6 @@ project.media.forEach((media) => {
 }
 
 
-/* =========================================
-   CLICK PROJECT ROW
-========================================= */
 
 projectRows.forEach((row, index) => {
 
@@ -757,9 +699,6 @@ projectRows.forEach((row, index) => {
 });
 
 
-/* =========================================
-   NEXT
-========================================= */
 
 modalNext.addEventListener("click", () => {
 
@@ -775,9 +714,6 @@ modalNext.addEventListener("click", () => {
 });
 
 
-/* =========================================
-   PREVIOUS
-========================================= */
 
 modalPrevious.addEventListener("click", () => {
 
@@ -794,9 +730,6 @@ modalPrevious.addEventListener("click", () => {
 });
 
 
-/* =========================================
-   CLOSE BY CLICKING OUTSIDE
-========================================= */
 
 modalBackdrop.addEventListener(
   "click",
@@ -817,7 +750,6 @@ function closeProjectModal() {
 }
 
 
-/* ESC also closes modal */
 
 document.addEventListener("keydown", event => {
 
