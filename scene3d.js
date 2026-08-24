@@ -308,11 +308,11 @@ function buildInstances(prototypeScene, manifest, buffer) {
 }
 
 function addLights() {
-  const key = new THREE.DirectionalLight(0xffffff, 1.44);
+  const key = new THREE.DirectionalLight(0xffffff, 1.5);
   key.position.set(-0.3153, 0.7498, 0.5817).multiplyScalar(60);
   scene.add(key);
 
-  const warm = new THREE.DirectionalLight(0xffec40, 1.15);
+  const warm = new THREE.DirectionalLight(0xffec40, 1.2);
   warm.position.set(0.1887, 0.6533, -0.7332).multiplyScalar(60);
   scene.add(warm);
 }
@@ -390,7 +390,10 @@ async function init() {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.NoToneMapping;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.2;
 
   scene = new THREE.Scene();
 
@@ -411,7 +414,7 @@ async function init() {
 
   scene.environment = sky;
   scene.environmentRotation.set(0, Math.PI / 2, 0);
-  scene.environmentIntensity = 0.85;
+  scene.environmentIntensity = 0.9;
 
   let blenderCamera = null;
   sceneGltf.scene.traverse((object) => {
@@ -421,6 +424,56 @@ async function init() {
       applyWind(object);
     }
   });
+
+  sceneGltf.scene.traverse((object) => {
+
+  if (object.isCamera && !blenderCamera) {
+    blenderCamera = object;
+  }
+
+  if (object.isMesh) {
+
+    object.material =
+      convertMaterial(object.material);
+
+    applyWind(object);
+
+
+    /* BOOST COLOR OF MAIN OBJECTS */
+
+    const excluded = new Set([
+      "grass_samples",
+      "bushes",
+      "Ground",
+      "GROUND.002",
+      "flower_1",
+      "flower_2",
+      "flower_3",
+      "flower_4"
+    ]);
+
+    const mat = object.material;
+
+    if (
+      mat &&
+      mat.color &&
+      !excluded.has(mat.name)
+    ) {
+
+      const hsl = {};
+
+      mat.color.getHSL(hsl);
+
+      mat.color.setHSL(
+        hsl.h,
+        Math.min(hsl.s * 1.010, 1),
+        Math.min(hsl.l * 0.998, 1)
+      );
+
+    }
+  }
+
+});
 
   scene.add(createSkyBackdrop(skyDetail));
   scene.add(sceneGltf.scene);
@@ -445,12 +498,17 @@ async function init() {
     camera.far = blenderCamera.far;
   }
 
+  baseFov *= 0.8;
+camera.fov = baseFov;
+camera.updateProjectionMatrix();
+
   addLights();
 
   clock = new THREE.Clock();
 
   if (sceneGltf.animations.length) {
     mixer = new THREE.AnimationMixer(sceneGltf.scene);
+    mixer.timeScale = 0.3;
     for (const clip of sceneGltf.animations) {
       mixer.clipAction(clip).play();
     }

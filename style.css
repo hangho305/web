@@ -2817,4 +2817,25 @@ body.modal-open {
   z-index: -1;
 
   pointer-events: none;
+
+    filter:
+    saturate(1.1)
+    brightness(0.93)
+    contrast(1);
+}
+
+.sky-background {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  z-index: -1;
+
+  pointer-events: none;
 }
