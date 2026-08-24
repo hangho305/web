@@ -3,7 +3,8 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 
 const DIR = "assets/3d/";
-const DRACO_PATH = "https://cdn.jsdelivr.net/npm/three@0.183.2/examples/jsm/libs/draco/";
+const DRACO_PATH =
+  "https://cdn.jsdelivr.net/npm/three@0.183.2/examples/jsm/libs/draco/";
 
 const REF_ASPECT = 496 / 1078;
 
@@ -15,7 +16,7 @@ const FLAT_MATERIALS = new Set([
   "flower_3",
   "flower_4",
   "Ground",
-  "GROUND.002"
+  "GROUND.002",
 ]);
 
 const CUTOUT_MATERIALS = new Set([
@@ -24,8 +25,40 @@ const CUTOUT_MATERIALS = new Set([
   "flower_1",
   "flower_2",
   "flower_3",
-  "flower_4"
+  "flower_4",
 ]);
+
+const SKY_THETA = new THREE.Vector2(-0.803527, 0.592737);
+const SKY_ROTATION = 0;
+
+const SKY_VERTEX = `
+varying vec2 vNdc;
+void main() {
+  vNdc = position.xy;
+  gl_Position = vec4(position.xy, 1.0, 1.0);
+}`;
+
+const SKY_FRAGMENT = `
+uniform sampler2D uMap;
+uniform vec2 uTheta;
+uniform float uSkyRotation;
+uniform mat4 uCameraWorld;
+uniform mat4 uProjectionInverse;
+varying vec2 vNdc;
+
+void main() {
+  vec4 viewRay = uProjectionInverse * vec4(vNdc, -1.0, 1.0);
+  vec3 dir = normalize(mat3(uCameraWorld) * (viewRay.xyz / viewRay.w));
+
+  float psi = atan(dir.x, -dir.z);
+  float theta = asin(clamp(dir.y, -1.0, 1.0));
+
+  float u = (psi + uSkyRotation) * 0.15915494309189535 + 0.5;
+  float v = (theta - uTheta.x) / (uTheta.y - uTheta.x);
+
+  gl_FragColor = texture2D(uMap, vec2(u, clamp(v, 0.0, 1.0)));
+  #include <colorspace_fragment>
+}`;
 
 const WIND_DIRECTION = new THREE.Vector2(0.77, 0.64).normalize();
 const WIND_SPEED = 2.0;
@@ -37,7 +70,7 @@ const WIND_STRENGTH = new Map([
   ["flower_1", 0.14],
   ["flower_2", 0.14],
   ["flower_3", 0.14],
-  ["flower_4", 0.14]
+  ["flower_4", 0.14],
 ]);
 
 const WIND_DECLARATIONS = `#include <common>
@@ -87,6 +120,7 @@ const cameraRight = new THREE.Vector3();
 const cameraUp = new THREE.Vector3();
 const parallaxPivot = new THREE.Vector3();
 const windTime = { value: 0 };
+let skyUniforms = null;
 
 const materialCache = new Map();
 
@@ -101,7 +135,7 @@ function convertMaterial(source) {
     material = new THREE.MeshBasicMaterial({
       map: source.map || null,
       color: source.color ? source.color.clone() : new THREE.Color(0xffffff),
-      side: THREE.DoubleSide
+      side: THREE.DoubleSide,
     });
     material.name = source.name;
   }
@@ -119,8 +153,48 @@ function convertMaterial(source) {
 
 async function loadInstanceData() {
   const manifest = await fetch(DIR + "instances.json").then((r) => r.json());
-  const buffer = await fetch(DIR + manifest.buffer).then((r) => r.arrayBuffer());
+  const buffer = await fetch(DIR + manifest.buffer).then((r) =>
+    r.arrayBuffer(),
+  );
   return { manifest, buffer };
+}
+
+function createSkyBackdrop(texture) {
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  texture.generateMipmaps = true;
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.ClampToEdgeWrapping;
+  texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+
+  const material = new THREE.ShaderMaterial({
+    uniforms: {
+      uMap: { value: texture },
+      uTheta: { value: SKY_THETA },
+      uSkyRotation: { value: SKY_ROTATION },
+      uCameraWorld: { value: new THREE.Matrix4() },
+      uProjectionInverse: { value: new THREE.Matrix4() },
+    },
+    vertexShader: SKY_VERTEX,
+    fragmentShader: SKY_FRAGMENT,
+    depthTest: false,
+    depthWrite: false,
+  });
+
+  skyUniforms = material.uniforms;
+
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+  mesh.frustumCulled = false;
+  mesh.renderOrder = -1;
+  return mesh;
+}
+
+function updateSky() {
+  if (!skyUniforms) return;
+  camera.updateMatrixWorld();
+  skyUniforms.uCameraWorld.value.copy(camera.matrixWorld);
+  skyUniforms.uProjectionInverse.value.copy(camera.projectionMatrixInverse);
 }
 
 function setupWindMaterial(material) {
@@ -192,7 +266,7 @@ function buildInstances(prototypeScene, manifest, buffer) {
     const mesh = new THREE.InstancedMesh(
       prototype.geometry,
       convertMaterial(prototype.material),
-      entry.count
+      entry.count,
     );
     mesh.name = name;
 
@@ -206,14 +280,14 @@ function buildInstances(prototypeScene, manifest, buffer) {
       position.set(
         pMin[0] + (u16[o] / 65535) * pSpan[0],
         pMin[1] + (u16[o + 1] / 65535) * pSpan[1],
-        pMin[2] + (u16[o + 2] / 65535) * pSpan[2]
+        pMin[2] + (u16[o + 2] / 65535) * pSpan[2],
       );
       quaternion
         .set(
           i16[o + 3] / 32767,
           i16[o + 4] / 32767,
           i16[o + 5] / 32767,
-          i16[o + 6] / 32767
+          i16[o + 6] / 32767,
         )
         .normalize();
 
@@ -257,7 +331,7 @@ function setupParallax() {
     if (event.pointerType !== "mouse") return;
     pointerTarget.set(
       (event.clientX / window.innerWidth) * 2 - 1,
-      1 - (event.clientY / window.innerHeight) * 2
+      1 - (event.clientY / window.innerHeight) * 2,
     );
   });
 }
@@ -283,6 +357,7 @@ function animate() {
   windTime.value += delta;
   if (mixer) mixer.update(delta);
   updateParallax(delta);
+  updateSky();
 
   renderer.render(scene, camera);
 }
@@ -301,12 +376,13 @@ function resize() {
           2 *
             Math.atan(
               Math.tan(THREE.MathUtils.degToRad(baseFov) / 2) *
-                (REF_ASPECT / aspect)
-            )
+                (REF_ASPECT / aspect),
+            ),
         )
       : baseFov;
   camera.updateProjectionMatrix();
 
+  updateSky();
   render();
 }
 
@@ -321,18 +397,18 @@ async function init() {
   const draco = new DRACOLoader().setDecoderPath(DRACO_PATH);
   const gltfLoader = new GLTFLoader().setDRACOLoader(draco);
 
-  const [sky, sceneGltf, prototypeGltf, instanceData] = await Promise.all([
-    new THREE.TextureLoader().loadAsync(DIR + "sky.jpg"),
-    gltfLoader.loadAsync(DIR + "scene.glb"),
-    gltfLoader.loadAsync(DIR + "prototypes.glb"),
-    loadInstanceData()
-  ]);
+  const [sky, skyDetail, sceneGltf, prototypeGltf, instanceData] =
+    await Promise.all([
+      new THREE.TextureLoader().loadAsync(DIR + "sky.jpg"),
+      new THREE.TextureLoader().loadAsync(DIR + "sky-detail.jpg"),
+      gltfLoader.loadAsync(DIR + "scene.glb"),
+      gltfLoader.loadAsync(DIR + "prototypes.glb"),
+      loadInstanceData(),
+    ]);
 
   sky.mapping = THREE.EquirectangularReflectionMapping;
   sky.colorSpace = THREE.SRGBColorSpace;
 
-  scene.background = sky;
-  scene.backgroundRotation.set(0, Math.PI / 2, 0);
   scene.environment = sky;
   scene.environmentRotation.set(0, Math.PI / 2, 0);
   scene.environmentIntensity = 0.85;
@@ -346,9 +422,14 @@ async function init() {
     }
   });
 
+  scene.add(createSkyBackdrop(skyDetail));
   scene.add(sceneGltf.scene);
   scene.add(
-    buildInstances(prototypeGltf.scene, instanceData.manifest, instanceData.buffer)
+    buildInstances(
+      prototypeGltf.scene,
+      instanceData.manifest,
+      instanceData.buffer,
+    ),
   );
 
   camera = new THREE.PerspectiveCamera(baseFov, 1, 0.1, 200);
@@ -357,7 +438,7 @@ async function init() {
     blenderCamera.updateWorldMatrix(true, false);
     camera.position.setFromMatrixPosition(blenderCamera.matrixWorld);
     camera.quaternion.setFromRotationMatrix(
-      new THREE.Matrix4().extractRotation(blenderCamera.matrixWorld)
+      new THREE.Matrix4().extractRotation(blenderCamera.matrixWorld),
     );
     baseFov = blenderCamera.fov;
     camera.near = blenderCamera.near;
