@@ -28,6 +28,14 @@ const CUTOUT_MATERIALS = new Set([
   "flower_4",
 ]);
 
+// Overrides for PBR values that came out of Blender wrong for the surface they
+// represent. Only applies to materials left as MeshStandardMaterial -- the
+// FLAT_MATERIALS above become MeshBasicMaterial, which has no roughness.
+const MATERIAL_TWEAKS = new Map([
+  // pillow: fabric, so drop the satin sheen the 0.35 export gives it
+  ["Material.003", { roughness: 0.95, metalness: 0.0 }],
+]);
+
 const SKY_THETA = new THREE.Vector2(-0.803527, 0.592737);
 const SKY_ROTATION = 0;
 
@@ -99,10 +107,22 @@ vec3 windOffset = vec3(uWindDirection.x, 0.0, uWindDirection.y) *
 mvPosition.xyz += mat3(viewMatrix) * windOffset;
 gl_Position = projectionMatrix * mvPosition;`;
 
+// Distance from the Blender camera to the desk/computer, which is what the
+// parallax pivots on.
 const PARALLAX_PIVOT_DISTANCE = 42;
+// Units to push the camera along that same axis, toward the desk. Raise to move
+// in closer; the pivot stays put because it is measured off the original spot.
+const CAMERA_DOLLY = 6;
 const PARALLAX_RANGE_X = 0.5;
 const PARALLAX_RANGE_Y = 0.3;
 const PARALLAX_SMOOTHING = 0.002;
+
+// The shadow frustum is aimed at the desk/computer cluster, not the origin --
+// the origin is off in empty landscape, so a default-aimed frustum would cover
+// no props at all. EXTENT is the half-width it covers, in scene units.
+const SHADOW_TARGET = new THREE.Vector3(39, 4, 6);
+const SHADOW_EXTENT = 30;
+const SHADOW_DISTANCE = 60;
 
 const canvas = document.getElementById("scene3d");
 
@@ -146,6 +166,9 @@ function convertMaterial(source) {
     material.alphaTest = 0.5;
     material.side = THREE.DoubleSide;
   }
+
+  const tweak = MATERIAL_TWEAKS.get(source.name);
+  if (tweak) Object.assign(material, tweak);
 
   materialCache.set(source.uuid, material);
   return material;
@@ -308,8 +331,30 @@ function buildInstances(prototypeScene, manifest, buffer) {
 }
 
 function addLights() {
-  const key = new THREE.DirectionalLight(0xffffff, 1.5);
-  key.position.set(-0.3153, 0.7498, 0.5817).multiplyScalar(60);
+  const key = new THREE.DirectionalLight(0xffffff, 1.44);
+  // A DirectionalLight points at its target, so moving the target has to be
+  // paired with moving the position or the light direction changes and the
+  // whole scene reshades. Offsetting both by SHADOW_TARGET keeps the original
+  // direction exactly while centring the shadow frustum on the props.
+  key.target.position.copy(SHADOW_TARGET);
+  key.position
+    .set(-0.3153, 0.7498, 0.5817)
+    .multiplyScalar(SHADOW_DISTANCE)
+    .add(SHADOW_TARGET);
+
+  key.castShadow = true;
+  key.shadow.mapSize.set(2048, 2048);
+  key.shadow.camera.left = -SHADOW_EXTENT;
+  key.shadow.camera.right = SHADOW_EXTENT;
+  key.shadow.camera.top = SHADOW_EXTENT;
+  key.shadow.camera.bottom = -SHADOW_EXTENT;
+  key.shadow.camera.near = SHADOW_DISTANCE - SHADOW_EXTENT;
+  key.shadow.camera.far = SHADOW_DISTANCE + SHADOW_EXTENT;
+  key.shadow.bias = -0.0005;
+  key.shadow.normalBias = 0.02;
+  key.shadow.camera.updateProjectionMatrix();
+
+  scene.add(key.target);
   scene.add(key);
 
   const warm = new THREE.DirectionalLight(0xffec40, 1.2);
@@ -324,7 +369,7 @@ function setupParallax() {
   parallaxPivot
     .set(0, 0, -1)
     .applyQuaternion(camera.quaternion)
-    .multiplyScalar(PARALLAX_PIVOT_DISTANCE)
+    .multiplyScalar(PARALLAX_PIVOT_DISTANCE - CAMERA_DOLLY)
     .add(cameraBase);
 
   window.addEventListener("pointermove", (event) => {
@@ -363,8 +408,10 @@ function animate() {
 }
 
 function resize() {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+  // Follow the canvas box, not window.innerHeight: the CSS height is pinned to
+  // lvh, so this stays constant while the mobile URL bar shows and hides.
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
   const aspect = width / height;
 
   renderer.setSize(width, height, false);
@@ -395,6 +442,9 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.2;
 
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
   scene = new THREE.Scene();
 
   const draco = new DRACOLoader().setDecoderPath(DRACO_PATH);
@@ -422,6 +472,12 @@ renderer.toneMappingExposure = 1.2;
     if (object.isMesh) {
       object.material = convertMaterial(object.material);
       applyWind(object);
+      // FLAT_MATERIALS became MeshBasicMaterial, which is unlit: it cannot
+      // receive a shadow, and casting from the landscape plane only buys
+      // shadow acne. Every other prop both casts and receives.
+      const flat = FLAT_MATERIALS.has(object.material.name);
+      object.castShadow = !flat;
+      object.receiveShadow = !flat;
     }
   });
 
@@ -498,9 +554,9 @@ renderer.toneMappingExposure = 1.2;
     camera.far = blenderCamera.far;
   }
 
-  baseFov *= 0.8;
-camera.fov = baseFov;
-camera.updateProjectionMatrix();
+  // Dolly in along the view axis rather than narrowing the FOV, so the
+  // perspective on the scene is unchanged.
+  camera.translateZ(-CAMERA_DOLLY);
 
   addLights();
 
